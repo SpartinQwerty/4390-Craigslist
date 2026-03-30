@@ -6,6 +6,10 @@ Seller image dimensions: 62x62
 
 */
 
+header {
+    color: #2A2A2A;
+    font-color: white;
+}
 
 h1 {
     font-family: 'Times New Roman, Times, serif';
