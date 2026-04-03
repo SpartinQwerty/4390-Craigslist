@@ -3,27 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Post</title>
+  <title>Create a New Post</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
   <header class="header">
-    <div class="logo">My Website</div>
-
+    <div class="logo">Craigslist</div>
 
     <nav class="nav">
-        <!-- Holder until buttons are added. Acting as easy navigation check between pages. !-->
-      <a href="/index.html">Home</a>
-      <a href="/buying.html">Buying/Selling</a>
-      <a href="/new_post.html">New Post</a>
-    
+      <!-- Holder until buttons are added. Acting as easy navigation check between pages. !-->
+      <a href="index.html">Home</a>
+      <a href="buying.html">Buying/Selling</a>
+      <a href="new_post.html" class="active">New Post</a>
     </nav>
   </header>
 
   <main class="content">
-    <h1>New Page Holder</h1>
+    <section class="post-card">
+      <h1>Create a New Post</h1>
 
+      <form class="post-form">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="Enter post title" />
+
+        <label for="category">Category</label>
+        <select id="category">
+          <option>Bikes</option>
+          <option>Furniture</option>
+          <option>Cars</option>
+          <option>Electronics</option>
+        </select>
+
+        <label for="price">Price</label>
+        <input type="text" id="price" placeholder="$0.00" />
+
+        <label for="location">Location</label>
+        <input type="text" id="location" placeholder="Enter location" />
+
+        <label for="description">Description</label>
+        <textarea id="description" rows="5" placeholder="Write a short description"></textarea>
+
+        <button type="submit" class="submit-btn">Post Listing</button>
+      </form>
+    </section>
   </main>
 </body>
 </html>
