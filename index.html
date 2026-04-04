@@ -1,28 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home Page</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link id="theme-style" rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-  <header class="header">
-    <div class="logo">My Website</div>
+  <body>
+    <div id="header-placeholder"></div>
+    <script src="loadHeader.js"></script>
 
-    <nav class="nav">
-         <!-- Holder until buttons are added. Acting as easy navigation check between pages. !-->
-      <a href="/index.html">Home</a>
-      <a href="/buying.html">Buying/Selling</a>
-      <a href="/new_post.html">New Post</a>
-    
-    </nav>
-  </header>
+    <main class="content">
+      <section class="category-grid">
+        <button
+          type="button"
+          class="category-card tooltip-trigger hover-bulge"
+          data-tooltip="Placeholder button"
+          onclick="placeholderAction('For Sale')"
+        >
+          For Sale
+        </button>
 
-  <main class="content">
-    <h1>Home Page Holder</h1>
-    
-  </main>
-</body>
+        <button
+          type="button"
+          class="category-card tooltip-trigger hover-bulge"
+          data-tooltip="Placeholder button"
+          onclick="placeholderAction('Services')"
+        >
+          Services
+        </button>
+
+        <button
+          type="button"
+          class="category-card tooltip-trigger hover-bulge"
+          data-tooltip="Placeholder button"
+          onclick="placeholderAction('Discussion Forms')"
+        >
+          Discussion Forms
+        </button>
+
+        <button
+          type="button"
+          class="category-card tooltip-trigger hover-bulge"
+          data-tooltip="Placeholder button"
+          onclick="placeholderAction('Community')"
+        >
+          Community
+        </button>
+
+        <button
+          type="button"
+          class="category-card tooltip-trigger hover-bulge"
+          data-tooltip="Placeholder button"
+          onclick="placeholderAction('Housing')"
+        >
+          Housing
+        </button>
+
+        <button
+          type="button"
+          class="category-card tooltip-trigger hover-bulge"
+          data-tooltip="Placeholder button"
+          onclick="placeholderAction('Jobs')"
+        >
+          Jobs
+        </button>
+      </section>
+
+      <section class="recent-card">
+        <h2>Recent Activity</h2>
+
+        <div
+          id="search-results-message"
+          class="search-results-message"
+          aria-live="polite"
+        ></div>
+
+        <div class="recent-list">
+          <a
+            href="listing.html?id=1"
+            class="recent-item tooltip-trigger hover-bulge searchable-item"
+            data-tooltip="Go to listing page"
+            data-search="new bike bike 200 never used before bestuser11 for sale"
+          >
+            <div class="recent-image">Image</div>
+
+            <div class="recent-details">
+              <h3>New Bike</h3>
+              <p>$200</p>
+              <p>3 days ago</p>
+            </div>
+
+            <div class="recent-description">
+              <p>Never used before ...</p>
+            </div>
+
+            <div class="recent-user">
+              <p>100% positive</p>
+              <p>BestUser11</p>
+            </div>
+          </a>
+
+          <a
+            href="listing.html?id=2"
+            class="recent-item tooltip-trigger hover-bulge searchable-item"
+            data-tooltip="Go to listing page"
+            data-search="computer help needed 15 hr need help setting up mikewaba10 services"
+          >
+            <div class="recent-image">Image</div>
+
+            <div class="recent-details">
+              <h3>Computer Help Needed</h3>
+              <p>$15/hr</p>
+              <p>1 day ago</p>
+            </div>
+
+            <div class="recent-description">
+              <p>Need help setting up ...</p>
+            </div>
+
+            <div class="recent-user">
+              <p>99% positive</p>
+              <p>MikeWaba10</p>
+            </div>
+          </a>
+        </div>
+
+        <p id="no-results-message" hidden>No results found.</p>
+        <p class="empty-message">No other activity to show</p>
+      </section>
+    </main>
+
+    <script>
+      function placeholderAction(sectionName) {
+        alert(sectionName + " placeholder");
+      }
+    </script>
+  </body>
 </html>
