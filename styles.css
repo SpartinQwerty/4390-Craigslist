@@ -534,14 +534,52 @@ a:hover {
 }
 
 /* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .recent-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .recent-image {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
+
+  .topbar-center {
+    display: none;
+  }
+
+  .header {
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 600px) {
   .content {
-    padding: 12px 12px;
+    padding: 12px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .category-card {
+    padding: 40px 15px;
+    font-size: 14px;
   }
 
   .tabs {
-    gap: 12px;
-    font-size: 12px;
+    gap: 8px;
+    font-size: 11px;
   }
 
   .section-header {
@@ -551,12 +589,64 @@ a:hover {
   }
 
   .listing-item {
-    gap: 12px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px;
   }
 
   .listing-image {
     width: 50px;
     height: 50px;
+  }
+
+  .recent-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .recent-image {
+    display: none;
+  }
+
+  .recent-details,
+  .recent-description,
+  .recent-user {
+    font-size: 11px;
+  }
+
+  .recent-details h3 {
+    font-size: 13px;
+  }
+
+  .topbar-center {
+    display: none;
+  }
+
+  .topbar-right {
+    gap: 8px;
+  }
+
+  .topbar-right a,
+  .topbar-right button {
+    font-size: 18px;
+    padding: 4px;
+  }
+
+  .header {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-left {
+    gap: 8px;
+  }
+
+  .location-box {
+    font-size: 11px;
+  }
+
+  .location-box select {
+    font-size: 11px;
+    padding: 4px 6px;
   }
 }
