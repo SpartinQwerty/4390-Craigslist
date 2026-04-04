@@ -1,24 +1,31 @@
 <header class="header">
-  <div class="left">
-    <div class="logo">☮</div>
-    <span class="brand">Craigslist</span>
-    <div class="center">
-      <div class="location">
-        <span>Location:<br><strong>Charlotte</strong></span>
-        <span class="arrow">▼</span>
-      </div>
+  <div class="topbar-left">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Logo" style="height: 40px" />
+    </a>
+
+    <div class="location-box">
+      <label for="locationMenu">Location:</label>
+      <select id="locationMenu">
+        <option value="Charlotte">Charlotte</option>
+        <option value="New York">New York</option>
+        <option value="Miami">Miami</option>
+        <option value="Chicago">Chicago</option>
+      </select>
     </div>
   </div>
 
-  <div class="search-bar">
-    <input type="text" placeholder="Search">
-    <button>🔍</button>
+  <div class="topbar-center">
+    <form action="search.html" method="get">
+      <input type="search" name="q" placeholder="Search" />
+      <button type="submit">🔎</button>
+    </form>
   </div>
 
-  <nav class="nav-icons">
+  <nav class="topbar-right">
     <a href="index.html" title="Home">🏠</a>
-    <a href="new_post.html" title="Post">✏️</a>
+    <a href="new_post.html" title="New Post">✏️</a>
     <a href="account.html" title="Account">👤</a>
-    <a href="#" title="Dark Mode">🌙</a>
+    <button id="darkModeButton" title="Dark Mode">🌙</button>
   </nav>
 </header>
