@@ -3,25 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Project</title>
+  <title>My Account - Craigslist</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <header class="header">
-    <div class="logo">Craigslist</div>
-
-    <nav class="nav">
-      <a href="#">Home</a>
-      <a href="#">Post</a>
-      <a href="#">Account</a>
-      <a href="#">Darkmode</a>
-    </nav>
-  </header>
+  <div id="header-placeholder"></div>
+  <script src="loadHeader.js"></script>
 
   <main class="content">
-    <h1>Account</h1>
-    <p>This is a simple responsive layout.</p>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      craigslist &gt; <a href="#">home of user@email.com</a>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <a href="#postings" class="tab active">postings</a>
+      <a href="#drafts" class="tab">drafts</a>
+      <a href="#searches" class="tab">searches</a>
+      <a href="#settings" class="tab">settings</a>
+      <a href="#notifications" class="tab">notifications</a>
+    </div>
+
+    <!-- Postings Section -->
+    <div class="section" id="postings">
+      <div class="section-header">
+        <h2>postings</h2>
+        <button class="create-post-btn">Create post</button>
+      </div>
+      <div class="listings-list">
+        <div class="listing-item">
+          <div class="listing-image">Image</div>
+          <div class="listing-info">
+            <h3>Mountain Bike</h3>
+            <p class="price">$220</p>
+            <p class="listing-meta">Posted 2 days ago • <span class="status">Active</span></p>
+          </div>
+        </div>
+        <div class="listing-item">
+          <div class="listing-image">Image</div>
+          <div class="listing-info">
+            <h3>Computer Help Needed</h3>
+            <p class="price">$15/hr</p>
+            <p class="listing-meta">Posted 1 day ago • <span class="status">Active</span></p>
+          </div>
+        </div>
+        <p class="empty-state">no more postings</p>
+      </div>
+    </div>
+
+    <!-- Drafts Section (Hidden by default) -->
+    <div class="section" id="drafts" style="display: none;">
+      <div class="section-header">
+        <h2>drafts</h2>
+        <a href="#" class="make-new-post">make new post</a>
+      </div>
+      <p class="empty-state">no drafts</p>
+    </div>
+
+    <!-- Searches Section (Hidden by default) -->
+    <div class="section" id="searches" style="display: none;">
+      <h2>searches</h2>
+      <p class="empty-state">no searches</p>
+    </div>
+
+    <!-- Settings Section (Hidden by default) -->
+    <div class="section" id="settings" style="display: none;">
+      <h2>settings</h2>
+      <div class="settings-list">
+        <a href="#" class="settings-item">account preferences</a>
+        <a href="#" class="settings-item">email preferences</a>
+        <a href="#" class="settings-item">change password</a>
+        <a href="#" class="settings-item">phone settings</a>
+      </div>
+    </div>
+
+    <!-- Notifications Section (Hidden by default) -->
+    <div class="section" id="notifications" style="display: none;">
+      <h2>notifications</h2>
+      <p class="empty-state">no new notifications</p>
+    </div>
   </main>
+
+
 </body>
 </html>
