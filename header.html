@@ -16,10 +16,12 @@
   </div>
 
   <div class="topbar-center">
-    <form action="search.html" method="get">
-      <input type="search" name="q" placeholder="Search" />
+    <form id="search-form">
+      <input type="search" id="site-search" name="q" placeholder="Search listings" autocomplete="off" />
       <button type="submit">🔎</button>
     </form>
+
+    <div id="search-suggestions" class="search-suggestions hidden"></div>
   </div>
 
   <nav class="topbar-right">
