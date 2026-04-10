@@ -4,6 +4,11 @@ fetch("header.html")
     document.getElementById("header-placeholder").innerHTML = data;
 
     initHeaderScripts();
+    
+    if (typeof initPageScripts === "function") {
+      initPageScripts();
+    }
+
   });
 
 function initHeaderScripts() {
