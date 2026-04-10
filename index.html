@@ -10,7 +10,6 @@
   <body>
     <div id="header-placeholder"></div>
     <script src="loadHeader.js"></script>
-    <script src="script.js"></script>
 
     <main class="content">
       <section class="category-grid">
@@ -129,16 +128,18 @@
         </div>
 
         <p id="no-results-message" hidden>No results found.</p>
-        <p class="empty-message">No other activity to show</p>
+        <p class="empty-message" hidden>No other activity to show</p>
       </section>
     </main>
 
         <div id="loading-spinner"></div>
 
-    <script>
-      function placeholderAction(sectionName) {
-        alert(sectionName + " placeholder");
-      }
-    </script>
-  </body>
+<script>
+  function placeholderAction(sectionName) {
+    alert(sectionName + " placeholder");
+  }
+</script>
+
+<script src="script.js"></script>
+</body>
 </html>
