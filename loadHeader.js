@@ -13,6 +13,100 @@ function initHeaderScripts() {
   const mobileDarkModeBtn = document.getElementById("mobileDarkModeButton");
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
   const mobileMenu = document.getElementById("mobileMenu");
+  
+  // Live search functionality
+  const headerSearch = document.getElementById("headerSearch");
+  const searchSuggestions = document.getElementById("searchSuggestions");
+  const headerLoader = document.getElementById("headerLoader");
+  const searchForm = document.getElementById("searchForm");
+  
+  // Sample search data
+  const searchItems = [
+    "For Sale",
+    "Services",
+    "Housing",
+    "Jobs",
+    "Community",
+    "Discussion Forums",
+    "Bikes",
+    "Cars",
+    "Computer Help"
+  ];
+  
+  let searchTimeout; // Store timeout ID to cancel previous requests
+
+  if (headerSearch) {
+    headerSearch.addEventListener("input", function() {
+      const query = this.value.toLowerCase().trim();
+      
+      // Clear old results (but keep loader)
+      searchSuggestions.innerHTML = '<div id="headerLoader" class="header-loader hidden"></div>';
+      const loaderRef = document.getElementById("headerLoader");
+      
+      // Cancel previous timeout to prevent race conditions
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+      
+      // If empty, hide everything
+      if (query === "") {
+        loaderRef.classList.add("hidden");
+        searchSuggestions.classList.remove("active");
+        return;
+      }
+      
+      // Show loader
+      loaderRef.classList.remove("hidden");
+      searchSuggestions.classList.add("active");
+      
+      // Simulate loading delay with debounce
+      searchTimeout = setTimeout(() => {
+        loaderRef.classList.add("hidden");
+        
+        // Filter matches
+        const matches = searchItems.filter(item =>
+          item.toLowerCase().includes(query)
+        );
+        
+        // Show results
+        if (matches.length > 0) {
+          matches.forEach(match => {
+            const suggestion = document.createElement("div");
+            suggestion.className = "suggestion-item";
+            suggestion.textContent = match;
+            suggestion.addEventListener("click", function() {
+              headerSearch.value = match;
+              searchSuggestions.innerHTML = '<div id="headerLoader" class="header-loader hidden"></div>';
+              searchSuggestions.classList.remove("active");
+            });
+            searchSuggestions.appendChild(suggestion);
+          });
+        } else if (query !== "") {
+          const noResults = document.createElement("div");
+          noResults.className = "suggestion-item no-results";
+          noResults.textContent = "No results found";
+          searchSuggestions.appendChild(noResults);
+        }
+      }, 600);
+    });
+    
+    // Close suggestions when clicking outside
+    document.addEventListener("click", function(event) {
+      if (!event.target.closest(".topbar-center")) {
+        searchSuggestions.classList.remove("active");
+      }
+    });
+    
+    // Handle form submission
+    if (searchForm) {
+      searchForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        if (headerSearch.value.trim()) {
+          window.location.href = "search.html?q=" + encodeURIComponent(headerSearch.value);
+        }
+      });
+    }
+  }
 
   // Sync desktop and mobile location dropdowns
   const savedLocation = localStorage.getItem("selectedLocation");

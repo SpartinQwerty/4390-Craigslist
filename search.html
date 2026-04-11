@@ -82,7 +82,7 @@
 
         <div id="search-results-list" class="search-results-list">
           <!-- Listing Card 1 -->
-          <a href="listing.html?id=1" class="search-result-item">
+          <a href="listing.html?id=1" class="search-result-item" data-tags="bikes for-sale vehicles">
             <div class="result-image">Image</div>
             <div class="result-details">
               <h3>New Bike</h3>
@@ -99,7 +99,7 @@
           </a>
 
           <!-- Listing Card 2 -->
-          <a href="listing.html?id=2" class="search-result-item">
+          <a href="listing.html?id=2" class="search-result-item" data-tags="bikes for-sale vehicles">
             <div class="result-image">Image</div>
             <div class="result-details">
               <h3>Mountain Bike</h3>
@@ -116,7 +116,7 @@
           </a>
 
           <!-- Listing Card 3 -->
-          <a href="listing.html?id=3" class="search-result-item">
+          <a href="listing.html?id=3" class="search-result-item" data-tags="bikes for-sale vehicles">
             <div class="result-image">Image</div>
             <div class="result-details">
               <h3>Basket Bike</h3>
@@ -133,7 +133,7 @@
           </a>
 
           <!-- Listing Card 4 -->
-          <a href="listing.html?id=4" class="search-result-item">
+          <a href="listing.html?id=4" class="search-result-item" data-tags="bikes for-sale vehicles">
             <div class="result-image">Image</div>
             <div class="result-details">
               <h3>Kids Bike</h3>
@@ -150,7 +150,7 @@
           </a>
 
           <!-- Listing Card 5 -->
-          <a href="listing.html?id=5" class="search-result-item">
+          <a href="listing.html?id=5" class="search-result-item" data-tags="bikes for-sale vehicles e-bike">
             <div class="result-image">Image</div>
             <div class="result-details">
               <h3>E-Bike New</h3>
@@ -167,7 +167,7 @@
           </a>
 
           <!-- Listing Card 6 -->
-          <a href="listing.html?id=6" class="search-result-item">
+          <a href="listing.html?id=6" class="search-result-item" data-tags="bikes for-sale vehicles">
             <div class="result-image">Image</div>
             <div class="result-details">
               <h3>Bike for sale</h3>
@@ -180,6 +180,40 @@
             <div class="result-user">
               <p>45% positive</p>
               <p>myusernameisverylb</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 7 -->
+          <a href="listing.html?id=7" class="search-result-item" data-tags="computer help services">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>Computer Help Needed</h3>
+              <p class="result-price">$15/hr</p>
+              <p class="result-time">1 day ago</p>
+            </div>
+            <div class="result-description">
+              <p>Need help setting up ...</p>
+            </div>
+            <div class="result-user">
+              <p>99% positive</p>
+              <p>MikeWaba10</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 8 -->
+          <a href="listing.html?id=8" class="search-result-item" data-tags="toyota cars vehicles sold">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>Toyota Camry</h3>
+              <p class="result-price">$12,000</p>
+              <p class="result-time">3 weeks ago</p>
+            </div>
+            <div class="result-description">
+              <p class="status" style="background: #f8d7da; color: #721c24; display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Sold</p>
+            </div>
+            <div class="result-user">
+              <p>95% positive</p>
+              <p>CarSeller42</p>
             </div>
           </a>
         </div>
@@ -202,6 +236,58 @@
     </div>
 
     <script>
+      // Get search query from URL and filter results
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchQuery = urlParams.get('q') || '';
+      
+      const resultsTitle = document.getElementById('results-title');
+      const resultCount = document.getElementById('result-count');
+      const noResultsMsg = document.getElementById('no-results-message');
+      
+      // Filter results based on search query
+      function filterResults(query) {
+        if (!query.trim()) {
+          // Show all results if no query
+          document.querySelectorAll('.search-result-item').forEach(item => {
+            item.style.display = 'grid';
+          });
+          resultsTitle.textContent = 'Results for "All"';
+          resultCount.textContent = document.querySelectorAll('.search-result-item').length;
+          noResultsMsg.style.display = 'none';
+          return;
+        }
+        
+        const searchLower = query.toLowerCase();
+        const items = document.querySelectorAll('.search-result-item');
+        let visibleCount = 0;
+        
+        items.forEach(item => {
+          const tags = item.getAttribute('data-tags').toLowerCase();
+          const title = item.querySelector('h3').textContent.toLowerCase();
+          
+          // Check if search query matches tags or title
+          if (tags.includes(searchLower) || title.includes(searchLower)) {
+            item.style.display = 'grid';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        resultsTitle.textContent = `Results for "${query}"`;
+        resultCount.textContent = visibleCount;
+        
+        // Show no results message if needed
+        if (visibleCount === 0) {
+          noResultsMsg.style.display = 'block';
+        } else {
+          noResultsMsg.style.display = 'none';
+        }
+      }
+      
+      // Initial filter on page load
+      filterResults(searchQuery);
+      
       // Mobile filter toggle
       const mobileToggle = document.getElementById('mobile-filter-toggle');
       const searchFilters = document.getElementById('search-filters');
@@ -225,16 +311,48 @@
       // Simple pagination handler
       document.querySelectorAll('.pagination-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-          document.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          // TODO: Load results for selected page
+          if (this.textContent === '←' || this.textContent === '→') {
+            return; // Skip arrow buttons for now
+          }
+          
+          // Show loading overlay
+          const overlay = document.createElement('div');
+          overlay.className = 'loading-overlay active';
+          overlay.innerHTML = `
+            <div class="loading-overlay-content">
+              <div class="loading-overlay-spinner"></div>
+              <div class="loading-overlay-text">Loading page...</div>
+            </div>
+          `;
+          document.body.appendChild(overlay);
+          
+          // Simulate page loading (1 second)
+          setTimeout(function() {
+            overlay.remove();
+            
+            // Update active button
+            document.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+          }, 1000);
         });
       });
 
-      // Filter handler
+      // Filter handler with loading state
       document.querySelector('.apply-filters-btn').addEventListener('click', function() {
-        // TODO: Apply selected filters and update results
-        alert('Filters applied (placeholder)');
+        const mainContent = document.querySelector('main');
+        
+        // Create and show filter overlay
+        const filterOverlay = document.createElement('div');
+        filterOverlay.className = 'filter-overlay active';
+        filterOverlay.innerHTML = `<div class="filter-loader"></div>`;
+        mainContent.style.position = 'relative';
+        mainContent.appendChild(filterOverlay);
+        
+        // Simulate filtering (1.2 seconds)
+        setTimeout(function() {
+          filterOverlay.remove();
+          // Filters applied
+        }, 1200);
       });
     </script>
   </body>

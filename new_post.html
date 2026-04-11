@@ -40,5 +40,41 @@
       </form>
     </section>
   </main>
+
+  <script>
+    // Form submission with loading state
+    const form = document.querySelector('.post-form');
+    const submitBtn = document.querySelector('.submit-btn');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Add loading state to button
+      submitBtn.classList.add('btn-loading');
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Posting...';
+
+      // Simulate form submission delay (1.5 seconds)
+      setTimeout(function() {
+        // Remove loading state
+        submitBtn.classList.remove('btn-loading');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        
+        // Show success message
+        const successMsg = document.createElement('p');
+        successMsg.style.color = '#0b74c4';
+        successMsg.style.marginTop = '16px';
+        successMsg.textContent = '✓ Post created successfully! Redirecting...';
+        form.parentElement.appendChild(successMsg);
+        
+        // Redirect after 2 seconds
+        setTimeout(function() {
+          window.location.href = 'index.html';
+        }, 2000);
+      }, 1500);
+    });
+  </script>
 </body>
 </html>

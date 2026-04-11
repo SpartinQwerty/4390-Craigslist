@@ -162,13 +162,14 @@
   </main>
 
   <script>
-    // Tab functionality
+    // Tab functionality with loading skeleton
     const tabs = document.querySelectorAll('.tab');
     const sections = document.querySelectorAll('.section');
 
     tabs.forEach(tab => {
       tab.addEventListener('click', function() {
         const tabName = this.getAttribute('data-tab');
+        const targetSection = document.getElementById(tabName);
         
         // Remove active class from all tabs
         tabs.forEach(t => t.classList.remove('active'));
@@ -177,10 +178,180 @@
         
         // Add active class to clicked tab
         this.classList.add('active');
-        // Show corresponding section
-        document.getElementById(tabName).style.display = 'block';
+        
+        // Create skeleton loader
+        const skeletonLoader = document.createElement('div');
+        skeletonLoader.className = 'skeleton-loader';
+        for (let i = 0; i < 3; i++) {
+          const skeletonCard = document.createElement('div');
+          skeletonCard.className = 'skeleton-card';
+          skeletonCard.innerHTML = `
+            <div class="skeleton-image"></div>
+            <div style="flex: 1;">
+              <div class="skeleton-text title"></div>
+              <div class="skeleton-text"></div>
+              <div class="skeleton-text subtitle"></div>
+            </div>
+          `;
+          skeletonLoader.appendChild(skeletonCard);
+        }
+        
+        // Show skeleton temporarily
+        targetSection.innerHTML = '';
+        targetSection.appendChild(skeletonLoader);
+        targetSection.style.display = 'block';
+        
+        // Simulate loading and show real content after 600ms
+        setTimeout(function() {
+          // Reload the section content by recreating it
+          location.hash = '#' + tabName; // This helps with navigation
+          targetSection.style.display = 'block';
+          // Re-fetch content (in a real app, this would be an API call)
+          refreshTabContent(tabName);
+        }, 600);
       });
     });
+
+    // Function to refresh tab content
+    function refreshTabContent(tabName) {
+      const targetSection = document.getElementById(tabName);
+      
+      // Store original HTML for each section
+      const originalContent = {
+        'postings': `
+          <div class="section-header">
+            <h2>postings</h2>
+            <button class="create-post-btn" onclick="window.location.href='new_post.html'">Create post</button>
+          </div>
+          <div class="listings-list">
+            <div class="listing-item">
+              <div class="listing-image">Image</div>
+              <div class="listing-info">
+                <h3>Mountain Bike</h3>
+                <p class="price">$220</p>
+                <p class="listing-meta">Posted 2 days ago • <span class="status" style="background: #d1ecf1; color: #0c5460;">Active</span></p>
+              </div>
+            </div>
+            <div class="listing-item">
+              <div class="listing-image">Image</div>
+              <div class="listing-info">
+                <h3>Computer Help Needed</h3>
+                <p class="price">$15/hr</p>
+                <p class="listing-meta">Posted 1 day ago • <span class="status" style="background: #f8d7da; color: #721c24;">Complete</span></p>
+              </div>
+            </div>
+            <div class="listing-item">
+              <div class="listing-image">Image</div>
+              <div class="listing-info">
+                <h3>Toyota Camry</h3>
+                <p class="price">$12,000</p>
+                <p class="listing-meta">Posted 3 weeks ago • <span class="status" style="background: #f8d7da; color: #721c24;">Sold</span></p>
+              </div>
+            </div>
+            <p class="empty-state">no more postings</p>
+          </div>
+        `,
+        'drafts': `
+          <div class="section-header">
+            <h2>drafts</h2>
+            <button class="create-post-btn" onclick="window.location.href='new_post.html'">New Draft</button>
+          </div>
+          <div class="listings-list">
+            <div class="listing-item">
+              <div class="listing-image">Image</div>
+              <div class="listing-info">
+                <h3>Vintage Desk</h3>
+                <p class="price">$150</p>
+                <p class="listing-meta">Draft</p>
+              </div>
+            </div>
+            <p class="empty-state">no more drafts</p>
+          </div>
+        `,
+        'searches': `
+          <div class="section-header">
+            <h2>saved searches</h2>
+          </div>
+          <div class="listings-list">
+            <a href="search.html?q=bikes" class="recent-item search-item" style="display: grid;">
+              <div class="recent-image">Image</div>
+              <div style="flex: 1;">
+                <h3>Bikes under $300</h3>
+                <p style="color: #999; font-size: 12px;">2 results</p>
+              </div>
+              <button class="search-delete-btn" onclick="this.closest('.search-item').remove(); return false;">Delete</button>
+            </a>
+            <a href="search.html?q=services" class="recent-item search-item" style="display: grid;">
+              <div class="recent-image">Image</div>
+              <div style="flex: 1;">
+                <h3>Computer Services</h3>
+                <p style="color: #999; font-size: 12px;">1 result</p>
+              </div>
+              <button class="search-delete-btn" onclick="this.closest('.search-item').remove(); return false;">Delete</button>
+            </a>
+          </div>
+        `,
+        'settings': `
+          <div class="section-header">
+            <h2>account settings</h2>
+          </div>
+          <div class="settings-list">
+            <a href="#" class="settings-link">Email & Communications</a>
+            <a href="#" class="settings-link">Privacy</a>
+            <a href="#" class="settings-link">Safety</a>
+            <a href="#" class="settings-link">Account</a>
+            <a href="#" class="settings-link">Billing</a>
+            <a href="#" class="settings-link">Sign Out</a>
+          </div>
+        `,
+        'notifications': `
+          <div class="section-header">
+            <h2>notifications</h2>
+          </div>
+          <div class="notifications-list">
+            <div class="notification-item">
+              <div class="notification-content">
+                <p><strong>Your post "Mountain Bike" has been flagged</strong></p>
+                <p style="font-size: 12px; color: #999;">2 hours ago</p>
+              </div>
+              <button class="notification-dismiss-btn">Dismiss</button>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <p><strong>Someone viewed your posting</strong></p>
+                <p style="font-size: 12px; color: #999;">4 hours ago</p>
+              </div>
+              <button class="notification-dismiss-btn">Dismiss</button>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <p><strong>New reply to your search alert</strong></p>
+                <p style="font-size: 12px; color: #999;">1 day ago</p>
+              </div>
+              <button class="notification-dismiss-btn">Dismiss</button>
+            </div>
+            <p class="empty-state">no new notifications</p>
+          </div>
+        `
+      };
+      
+      targetSection.innerHTML = originalContent[tabName];
+      
+      // Re-attach event listeners to new content
+      const dismissButtons = targetSection.querySelectorAll('.notification-dismiss-btn');
+      dismissButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.closest('.notification-item').remove();
+        });
+      });
+      
+      const deleteButtons = targetSection.querySelectorAll('.search-delete-btn');
+      deleteButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.closest('.search-item').remove();
+        });
+      });
+    }
 
     // Notification dismiss functionality
     const dismissButtons = document.querySelectorAll('.notification-dismiss-btn');

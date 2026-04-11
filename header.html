@@ -16,9 +16,12 @@
   </div>
 
   <div class="topbar-center">
-    <form action="search.html" method="get">
-      <input type="search" name="q" placeholder="Search" />
+    <form action="search.html" method="get" id="searchForm" onsubmit="return false;">
+      <input type="search" id="headerSearch" name="q" placeholder="Search" autocomplete="off" />
       <button type="submit">🔎</button>
+      <div id="searchSuggestions" class="search-suggestions">
+        <div id="headerLoader" class="header-loader hidden"></div>
+      </div>
     </form>
   </div>
 
