@@ -18,19 +18,19 @@
     </div>
 
     <!-- Tab Navigation -->
-    <div class="tabs">
-      <a href="#postings" class="tab active">postings</a>
-      <a href="#drafts" class="tab">drafts</a>
-      <a href="#searches" class="tab">searches</a>
-      <a href="#settings" class="tab">settings</a>
-      <a href="#notifications" class="tab">notifications</a>
+    <div class="tabs" id="tabNav">
+      <button class="tab active" data-tab="postings">postings</button>
+      <button class="tab" data-tab="drafts">drafts</button>
+      <button class="tab" data-tab="searches">searches</button>
+      <button class="tab" data-tab="settings">settings</button>
+      <button class="tab" data-tab="notifications">notifications</button>
     </div>
 
     <!-- Postings Section -->
     <div class="section" id="postings">
       <div class="section-header">
         <h2>postings</h2>
-        <button class="create-post-btn">Create post</button>
+        <button class="create-post-btn" onclick="window.location.href='new_post.html'">Create post</button>
       </div>
       <div class="listings-list">
         <div class="listing-item">
@@ -38,7 +38,7 @@
           <div class="listing-info">
             <h3>Mountain Bike</h3>
             <p class="price">$220</p>
-            <p class="listing-meta">Posted 2 days ago • <span class="status">Active</span></p>
+            <p class="listing-meta">Posted 2 days ago • <span class="status" style="background: #d1ecf1; color: #0c5460;">Active</span></p>
           </div>
         </div>
         <div class="listing-item">
@@ -46,46 +46,158 @@
           <div class="listing-info">
             <h3>Computer Help Needed</h3>
             <p class="price">$15/hr</p>
-            <p class="listing-meta">Posted 1 day ago • <span class="status">Active</span></p>
+            <p class="listing-meta">Posted 1 day ago • <span class="status" style="background: #f8d7da; color: #721c24;">Complete</span></p>
+          </div>
+        </div>
+        <div class="listing-item">
+          <div class="listing-image">Image</div>
+          <div class="listing-info">
+            <h3>Toyota Camry</h3>
+            <p class="price">$12,000</p>
+            <p class="listing-meta">Posted 3 weeks ago • <span class="status" style="background: #f8d7da; color: #721c24;">Sold</span></p>
           </div>
         </div>
         <p class="empty-state">no more postings</p>
       </div>
     </div>
 
-    <!-- Drafts Section (Hidden by default) -->
+    <!-- Drafts Section -->
     <div class="section" id="drafts" style="display: none;">
       <div class="section-header">
         <h2>drafts</h2>
-        <a href="#" class="make-new-post">make new post</a>
+        <button class="create-post-btn" onclick="window.location.href='new_post.html'">New Draft</button>
       </div>
-      <p class="empty-state">no drafts</p>
+      <div class="listings-list">
+        <div class="listing-item">
+          <div class="listing-image">Image</div>
+          <div class="listing-info">
+            <h3>Vintage Desk</h3>
+            <p class="price">$150</p>
+            <p class="listing-meta">Saved 5 days ago • <span class="status" style="background: #fff3cd; color: #856404;">Draft</span></p>
+          </div>
+        </div>
+      </div>
+      <p class="empty-state">no more drafts</p>
     </div>
 
-    <!-- Searches Section (Hidden by default) -->
+    <!-- Searches Section -->
     <div class="section" id="searches" style="display: none;">
-      <h2>searches</h2>
-      <p class="empty-state">no searches</p>
+      <h2>saved searches</h2>
+      <div class="listings-list">
+        <div class="recent-item">
+          <div class="recent-image">Image</div>
+          <div class="recent-details">
+            <h3>Bikes under $300</h3>
+            <p>Category: For Sale • Price: $0 - $300</p>
+          </div>
+          <div class="recent-description">
+            <p>Saved 10 days ago</p>
+          </div>
+          <div class="recent-user">
+            <button class="search-delete-btn" title="Delete" style="background: none; border: none; color: #999; font-size: 16px; cursor: pointer; padding: 0;">✕</button>
+          </div>
+        </div>
+
+        <div class="recent-item">
+          <div class="recent-image">Image</div>
+          <div class="recent-details">
+            <h3>Computer Services</h3>
+            <p>Category: Services • Location: Charlotte</p>
+          </div>
+          <div class="recent-description">
+            <p>Saved 7 days ago</p>
+          </div>
+          <div class="recent-user">
+            <button class="search-delete-btn" title="Delete" style="background: none; border: none; color: #999; font-size: 16px; cursor: pointer; padding: 0;">✕</button>
+          </div>
+        </div>
+      </div>
+      <p class="empty-state">no saved searches</p>
     </div>
 
-    <!-- Settings Section (Hidden by default) -->
+    <!-- Settings Section -->
     <div class="section" id="settings" style="display: none;">
-      <h2>settings</h2>
+      <h2>account settings</h2>
       <div class="settings-list">
         <a href="#" class="settings-item">account preferences</a>
         <a href="#" class="settings-item">email preferences</a>
         <a href="#" class="settings-item">change password</a>
         <a href="#" class="settings-item">phone settings</a>
+        <a href="#" class="settings-item">block users</a>
+        <a href="#" class="settings-item">privacy settings</a>
       </div>
     </div>
 
-    <!-- Notifications Section (Hidden by default) -->
+    <!-- Notifications Section -->
     <div class="section" id="notifications" style="display: none;">
       <h2>notifications</h2>
+      <div class="notification-list">
+        <div class="notification-item">
+          <div class="notification-content">
+            <h3>New message from BestUser11</h3>
+            <p>Interested in the Mountain Bike</p>
+            <p class="notification-time">2 hours ago</p>
+          </div>
+          <button class="notification-dismiss-btn" title="Dismiss">✕</button>
+        </div>
+        <div class="notification-item">
+          <div class="notification-content">
+            <h3>Your listing has expired</h3>
+            <p>Mountain Bike has not been renewed</p>
+            <p class="notification-time">1 day ago</p>
+          </div>
+          <button class="notification-dismiss-btn" title="Dismiss">✕</button>
+        </div>
+        <div class="notification-item">
+          <div class="notification-content">
+            <h3>Account verified</h3>
+            <p>Your email has been successfully verified</p>
+            <p class="notification-time">3 days ago</p>
+          </div>
+          <button class="notification-dismiss-btn" title="Dismiss">✕</button>
+        </div>
+      </div>
       <p class="empty-state">no new notifications</p>
     </div>
   </main>
 
+  <script>
+    // Tab functionality
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabName = this.getAttribute('data-tab');
+        
+        // Remove active class from all tabs
+        tabs.forEach(t => t.classList.remove('active'));
+        // Hide all sections
+        sections.forEach(s => s.style.display = 'none');
+        
+        // Add active class to clicked tab
+        this.classList.add('active');
+        // Show corresponding section
+        document.getElementById(tabName).style.display = 'block';
+      });
+    });
+
+    // Notification dismiss functionality
+    const dismissButtons = document.querySelectorAll('.notification-dismiss-btn');
+    dismissButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.closest('.notification-item').remove();
+      });
+    });
+
+    // Search delete functionality
+    const deleteButtons = document.querySelectorAll('.search-delete-btn');
+    deleteButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.closest('.search-item').remove();
+      });
+    });
+  </script>
 
 </body>
 </html>

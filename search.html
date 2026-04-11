@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results - Craigslist</title>
+    <link id="theme-style" rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div id="header-placeholder"></div>
+    <script src="loadHeader.js"></script>
+
+    <div class="search-page-container">
+      <!-- Mobile Filter Toggle -->
+      <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+        <span class="toggle-label">Filters</span>
+        <span class="toggle-icon">&#9776;</span>
+      </button>
+
+      <!-- Filters Sidebar -->
+      <aside class="search-filters" id="search-filters">
+        <h3>Filters</h3>
+        
+        <div class="filter-group">
+          <label for="price-filter">Price:</label>
+          <select id="price-filter" class="filter-select">
+            <option value="any">Any Price</option>
+            <option value="0-50">$0 - $50</option>
+            <option value="50-100">$50 - $100</option>
+            <option value="100-500">$100 - $500</option>
+            <option value="500-1000">$500 - $1000</option>
+            <option value="1000">$1000+</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="photos-filter" class="checkbox-label">
+            <input type="checkbox" id="photos-filter" class="filter-checkbox" />
+            Has photos
+          </label>
+        </div>
+
+        <div class="filter-group">
+          <label for="time-filter">Time:</label>
+          <select id="time-filter" class="filter-select">
+            <option value="any">All Time</option>
+            <option value="1-day">Last 24 hours</option>
+            <option value="7-days">Last 7 days</option>
+            <option value="30-days">Last 30 days</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-filter">Sort By:</label>
+          <select id="sort-filter" class="filter-select">
+            <option value="recent">Most Recent</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="popular">Most Popular</option>
+            <option value="viewed">Most Viewed</option>
+            <option value="rating">Best Rating</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="location-filter">Location:</label>
+          <input type="text" id="location-filter" class="filter-input" value="Charlotte, NC 28262" placeholder="Enter location" />
+        </div>
+
+        <button class="apply-filters-btn">Apply Filters</button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="search-content">
+        <div class="search-header">
+          <h2 id="results-title">Results for "Bikes"</h2>
+          <div class="results-count">
+            <span id="result-count">6</span> results
+          </div>
+        </div>
+
+        <div id="search-results-list" class="search-results-list">
+          <!-- Listing Card 1 -->
+          <a href="listing.html?id=1" class="search-result-item">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>New Bike</h3>
+              <p class="result-price">$200</p>
+              <p class="result-time">3 days ago</p>
+            </div>
+            <div class="result-description">
+              <p>Never used before ...</p>
+            </div>
+            <div class="result-user">
+              <p>100% positive</p>
+              <p>BestUser11</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 2 -->
+          <a href="listing.html?id=2" class="search-result-item">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>Mountain Bike</h3>
+              <p class="result-price">$220</p>
+              <p class="result-time">2 days ago</p>
+            </div>
+            <div class="result-description">
+              <p>Bought a few years ago ...</p>
+            </div>
+            <div class="result-user">
+              <p>93% positive</p>
+              <p>MountainMan</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 3 -->
+          <a href="listing.html?id=3" class="search-result-item">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>Basket Bike</h3>
+              <p class="result-price">$120</p>
+              <p class="result-time">8 days ago</p>
+            </div>
+            <div class="result-description">
+              <p>Bike with a basket on ...</p>
+            </div>
+            <div class="result-user">
+              <p>89% positive</p>
+              <p>DFlowers</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 4 -->
+          <a href="listing.html?id=4" class="search-result-item">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>Kids Bike</h3>
+              <p class="result-price">$85</p>
+              <p class="result-time">6 days ago</p>
+            </div>
+            <div class="result-description">
+              <p>My kid has outgrown ...</p>
+            </div>
+            <div class="result-user">
+              <p>98% positive</p>
+              <p>MrDiv3r</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 5 -->
+          <a href="listing.html?id=5" class="search-result-item">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>E-Bike New</h3>
+              <p class="result-price">$800</p>
+              <p class="result-time">1 day ago</p>
+            </div>
+            <div class="result-description">
+              <p>New E-Bike for sale from ...</p>
+            </div>
+            <div class="result-user">
+              <p>99% positive</p>
+              <p>SuperBikesInc</p>
+            </div>
+          </a>
+
+          <!-- Listing Card 6 -->
+          <a href="listing.html?id=6" class="search-result-item">
+            <div class="result-image">Image</div>
+            <div class="result-details">
+              <h3>Bike for sale</h3>
+              <p class="result-price">$145</p>
+              <p class="result-time">18 days ago</p>
+            </div>
+            <div class="result-description">
+              <p>This is my bike i dont ...</p>
+            </div>
+            <div class="result-user">
+              <p>45% positive</p>
+              <p>myusernameisverylb</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="pagination-btn">&larr;</button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <button class="pagination-btn">4</button>
+          <button class="pagination-btn">5</button>
+          <button class="pagination-btn">6</button>
+          <button class="pagination-btn">&rarr;</button>
+        </div>
+
+        <!-- No Results Message -->
+        <p id="no-results-message" class="no-results-message" style="display: none;">No results found.</p>
+      </main>
+    </div>
+
+    <script>
+      // Mobile filter toggle
+      const mobileToggle = document.getElementById('mobile-filter-toggle');
+      const searchFilters = document.getElementById('search-filters');
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+          searchFilters.classList.toggle('active');
+          mobileToggle.classList.toggle('active');
+        });
+
+        // Close filters when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+          const isMobile = window.innerWidth <= 768;
+          if (isMobile && !event.target.closest('.search-filters') && !event.target.closest('.mobile-filter-toggle')) {
+            searchFilters.classList.remove('active');
+            mobileToggle.classList.remove('active');
+          }
+        });
+      }
+
+      // Simple pagination handler
+      document.querySelectorAll('.pagination-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          // TODO: Load results for selected page
+        });
+      });
+
+      // Filter handler
+      document.querySelector('.apply-filters-btn').addEventListener('click', function() {
+        // TODO: Apply selected filters and update results
+        alert('Filters applied (placeholder)');
+      });
+    </script>
+  </body>
+</html>
