@@ -661,7 +661,7 @@ a:hover {
   border-radius: 50%;
   animation: spin 1s linear infinite;
 
-  position: foxed;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -674,6 +674,12 @@ a:hover {
 #loading-spinner.show {
   opacity: 1;
   pointer-events: all;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .search-suggestions {
