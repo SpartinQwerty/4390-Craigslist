@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        alert("Thank you! Your post has been submitted to Craigslist.");
-
         form.reset();
     });
 });
