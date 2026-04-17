@@ -137,9 +137,13 @@ function initHeaderScripts() {
   const themeLink = document.getElementById("theme-style");
 
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme && themeLink) {
-    themeLink.href = savedTheme;
-  }
+  const validThemes = ["styles.css", "darkmode.css"];
+
+if (savedTheme && themeLink && validThemes.includes(savedTheme)) {
+  themeLink.href = savedTheme;
+} else if (themeLink) {
+  themeLink.href = "styles.css";
+}
 
   if (darkModeBtn) {
     darkModeBtn.addEventListener("click", function () {
