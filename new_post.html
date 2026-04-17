@@ -10,72 +10,55 @@
 <body>
   <div id="header-placeholder"></div>
   <script src="loadHeader.js"></script>
-  <script src="loadPost.js"></script>
 
   <main class="content">
     <section class="post-card">
       <h1>Create a New Post</h1>
+      <p class="form-helper">Fill out the form below to create a listing. Required fields will guide you as you type.</p>
 
-      <form class="post-form">
-        <label for="title">Title</label>
-        <input type="text" id="title" placeholder="Enter post title" />
+      <form class="post-form" novalidate>
+        <div class="form-field">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Enter post title" maxlength="60" aria-describedby="title-feedback" />
+          <p class="field-feedback" id="title-feedback" aria-live="polite"></p>
+        </div>
 
-        <label for="category">Category</label>
-        <select id="category">
-          <option>Bikes</option>
-          <option>Furniture</option>
-          <option>Cars</option>
-          <option>Electronics</option>
-        </select>
+        <div class="form-field">
+          <label for="category">Category</label>
+          <select id="category" name="category" aria-describedby="category-feedback">
+            <option value="">Select a category</option>
+            <option value="Bikes">Bikes</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Cars">Cars</option>
+            <option value="Electronics">Electronics</option>
+          </select>
+          <p class="field-feedback" id="category-feedback" aria-live="polite"></p>
+        </div>
 
-        <label for="price">Price</label>
-        <input type="text" id="price" placeholder="$0.00" />
+        <div class="form-field">
+          <label for="price">Price</label>
+          <input type="text" id="price" name="price" placeholder="$0.00" inputmode="decimal" aria-describedby="price-feedback" />
+          <p class="field-feedback" id="price-feedback" aria-live="polite"></p>
+        </div>
 
-        <label for="location">Location</label>
-        <input type="text" id="location" placeholder="Enter location" />
+        <div class="form-field">
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="Enter location" maxlength="40" aria-describedby="location-feedback" />
+          <p class="field-feedback" id="location-feedback" aria-live="polite"></p>
+        </div>
 
-        <label for="description">Description</label>
-        <textarea id="description" rows="5" placeholder="Write a short description"></textarea>
+        <div class="form-field">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="5" placeholder="Write a short description" maxlength="300" aria-describedby="description-feedback"></textarea>
+          <p class="field-feedback" id="description-feedback" aria-live="polite"></p>
+        </div>
 
         <button type="submit" class="submit-btn">Post Listing</button>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
       </form>
     </section>
   </main>
 
-  <script>
-    // Form submission with loading state
-    const form = document.querySelector('.post-form');
-    const submitBtn = document.querySelector('.submit-btn');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Add loading state to button
-      submitBtn.classList.add('btn-loading');
-      submitBtn.disabled = true;
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Posting...';
-
-      // Simulate form submission delay (1.5 seconds)
-      setTimeout(function() {
-        // Remove loading state
-        submitBtn.classList.remove('btn-loading');
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-        
-        // Show success message
-        const successMsg = document.createElement('p');
-        successMsg.style.color = '#0b74c4';
-        successMsg.style.marginTop = '16px';
-        successMsg.textContent = '✓ Post created successfully! Redirecting...';
-        form.parentElement.appendChild(successMsg);
-        
-        // Redirect after 2 seconds
-        setTimeout(function() {
-          window.location.href = 'index.html';
-        }, 2000);
-      }, 1500);
-    });
-  </script>
+  <script src="loadPost.js"></script>
 </body>
 </html>
