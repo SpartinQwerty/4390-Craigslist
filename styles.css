@@ -603,6 +603,63 @@ a:hover {
   resize: vertical;
 }
 
+
+.form-helper {
+  margin-bottom: 18px;
+  text-align: center;
+  color: #666;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-feedback {
+  min-height: 18px;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 2px 0 4px;
+}
+
+.feedback-error {
+  color: #b42318;
+}
+
+.feedback-success {
+  color: #067647;
+}
+
+.post-form input.is-error,
+.post-form select.is-error,
+.post-form textarea.is-error {
+  border-color: #d92d20;
+  box-shadow: 0 0 0 2px rgba(217, 45, 32, 0.15);
+}
+
+.post-form input.is-success,
+.post-form select.is-success,
+.post-form textarea.is-success {
+  border-color: #12b76a;
+  box-shadow: 0 0 0 2px rgba(18, 183, 106, 0.15);
+}
+
+.form-status {
+  min-height: 22px;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.form-status-error {
+  color: #b42318;
+}
+
+.form-status-success {
+  color: #067647;
+  font-weight: bold;
+}
+
 /* BUTTON */
 .submit-btn {
   margin-top: 20px;
