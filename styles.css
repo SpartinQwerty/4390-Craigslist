@@ -12,7 +12,7 @@ Seller image dimensions: 62x62
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
+  background-color: #BDEFF0;
   color: #333;
 }
 
@@ -60,7 +60,7 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: #333;
+  background: #AF83E2;
   color: white;
   gap: 20px;
   position: relative;
@@ -310,8 +310,8 @@ a:hover {
 }
 
 .category-card {
-  background: #808080;
-  color: #000;
+  background: #A6C6E3;
+  color: #341818;
   padding: 60px 20px;
   border-radius: 8px;
   border: none;
@@ -324,7 +324,7 @@ a:hover {
 }
 
 .category-card:hover {
-  background: #707070;
+  background: #84B3D7;
   transform: scale(1.02);
 }
 
@@ -345,7 +345,7 @@ a:hover {
 
 /* Recent Activity */
 .recent-card {
-  background: white;
+  background: #341818;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 0;
@@ -353,8 +353,8 @@ a:hover {
 }
 
 .recent-card h2 {
-  background: #808080;
-  color: white;
+  background: #D5C0F1;
+  color: #143B52;
   padding: 12px 16px;
   margin: 0;
   font-size: 16px;
@@ -375,7 +375,7 @@ a:hover {
   text-decoration: none;
   color: inherit;
   align-items: center;
-  background: white;
+  background: #F8F2FC;
   transition: all 0.2s ease;
 }
 
@@ -384,7 +384,7 @@ a:hover {
 }
 
 .recent-item:hover {
-  background: #f9f9f9;
+  background: #F4EAFA;
   transform: translateX(4px);
 }
 
@@ -702,7 +702,7 @@ a:hover {
   gap: 16px;
   padding: 12px;
   border-bottom: 1px solid #e8e8e8;
-  background: white;
+  background: #BAE7E9;
 }
 
 .listing-item:last-child {
@@ -710,7 +710,7 @@ a:hover {
 }
 
 .listing-item:hover {
-  background: #f9f9f9;
+  background: #8ECFD2;
 }
 
 .listing-image {
@@ -796,7 +796,7 @@ a:hover {
 
 .search-item {
   padding: 12px 16px;
-  background: white;
+  background: #BAE7E9;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   display: flex;
@@ -806,7 +806,7 @@ a:hover {
 }
 
 .search-item:hover {
-  background: #f9f9f9;
+  background: #8ECFD2;
   border-color: #999;
 }
 
@@ -865,7 +865,7 @@ a:hover {
 
 .notification-item {
   padding: 12px 16px;
-  background: white;
+  background: #BAE7E9;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   display: flex;
@@ -875,7 +875,7 @@ a:hover {
 }
 
 .notification-item:hover {
-  background: #f9f9f9;
+  background: #8ECFD2;
   border-color: #999;
 }
 
@@ -1258,7 +1258,7 @@ a:hover {
 
   .mobile-filter-toggle {
     display: block;
-    background: #6D6D6D;
+    background: #C39CDE;
     color: white;
     border: none;
     padding: 12px 16px;
