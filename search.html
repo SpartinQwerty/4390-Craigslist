@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Results - Craigslist</title>
-    <link id="theme-style" rel="stylesheet" href="styles.css" />
+    <script>
+      // Apply saved theme immediately to prevent flash
+      if (localStorage.getItem('theme') === 'darkmode.css') {
+        document.write('<link id="theme-style" rel="stylesheet" href="darkmode.css" />');
+      } else {
+        document.write('<link id="theme-style" rel="stylesheet" href="styles.css" />');
+      }
+    </script>
+    <script src="cards.js"></script>
   </head>
 
   <body>
@@ -81,153 +89,12 @@
         </div>
 
         <div id="search-results-list" class="search-results-list">
-          <!-- Listing Card 1 -->
-          <a href="listing.html?id=1" class="search-result-item" data-tags="bikes for-sale vehicles">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>New Bike</h3>
-              <p class="result-price">$200</p>
-              <p class="result-time">3 days ago</p>
-            </div>
-            <div class="result-description">
-              <p>Never used before ...</p>
-            </div>
-            <div class="result-user">
-              <p>100% positive</p>
-              <p>BestUser11</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 2 -->
-          <a href="listing.html?id=2" class="search-result-item" data-tags="bikes for-sale vehicles">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>Mountain Bike</h3>
-              <p class="result-price">$220</p>
-              <p class="result-time">2 days ago</p>
-            </div>
-            <div class="result-description">
-              <p>Bought a few years ago ...</p>
-            </div>
-            <div class="result-user">
-              <p>93% positive</p>
-              <p>MountainMan</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 3 -->
-          <a href="listing.html?id=3" class="search-result-item" data-tags="bikes for-sale vehicles">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>Basket Bike</h3>
-              <p class="result-price">$120</p>
-              <p class="result-time">8 days ago</p>
-            </div>
-            <div class="result-description">
-              <p>Bike with a basket on ...</p>
-            </div>
-            <div class="result-user">
-              <p>89% positive</p>
-              <p>DFlowers</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 4 -->
-          <a href="listing.html?id=4" class="search-result-item" data-tags="bikes for-sale vehicles">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>Kids Bike</h3>
-              <p class="result-price">$85</p>
-              <p class="result-time">6 days ago</p>
-            </div>
-            <div class="result-description">
-              <p>My kid has outgrown ...</p>
-            </div>
-            <div class="result-user">
-              <p>98% positive</p>
-              <p>MrDiv3r</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 5 -->
-          <a href="listing.html?id=5" class="search-result-item" data-tags="bikes for-sale vehicles e-bike">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>E-Bike New</h3>
-              <p class="result-price">$800</p>
-              <p class="result-time">1 day ago</p>
-            </div>
-            <div class="result-description">
-              <p>New E-Bike for sale from ...</p>
-            </div>
-            <div class="result-user">
-              <p>99% positive</p>
-              <p>SuperBikesInc</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 6 -->
-          <a href="listing.html?id=6" class="search-result-item" data-tags="bikes for-sale vehicles">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>Bike for sale</h3>
-              <p class="result-price">$145</p>
-              <p class="result-time">18 days ago</p>
-            </div>
-            <div class="result-description">
-              <p>This is my bike i dont ...</p>
-            </div>
-            <div class="result-user">
-              <p>45% positive</p>
-              <p>myusernameisverylb</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 7 -->
-          <a href="listing.html?id=7" class="search-result-item" data-tags="computer help services">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>Computer Help Needed</h3>
-              <p class="result-price">$15/hr</p>
-              <p class="result-time">1 day ago</p>
-            </div>
-            <div class="result-description">
-              <p>Need help setting up ...</p>
-            </div>
-            <div class="result-user">
-              <p>99% positive</p>
-              <p>MikeWaba10</p>
-            </div>
-          </a>
-
-          <!-- Listing Card 8 -->
-          <a href="listing.html?id=8" class="search-result-item" data-tags="toyota cars vehicles sold">
-            <div class="result-image">Image</div>
-            <div class="result-details">
-              <h3>Toyota Camry</h3>
-              <p class="result-price">$12,000</p>
-              <p class="result-time">3 weeks ago</p>
-            </div>
-            <div class="result-description">
-              <p class="status" style="background: #f8d7da; color: #721c24; display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Sold</p>
-            </div>
-            <div class="result-user">
-              <p>95% positive</p>
-              <p>CarSeller42</p>
-            </div>
-          </a>
+          <!-- Cards will be loaded here by JavaScript -->
         </div>
 
         <!-- Pagination -->
-        <div class="pagination">
-          <button class="pagination-btn">&larr;</button>
-          <button class="pagination-btn active">1</button>
-          <button class="pagination-btn">2</button>
-          <button class="pagination-btn">3</button>
-          <button class="pagination-btn">4</button>
-          <button class="pagination-btn">5</button>
-          <button class="pagination-btn">6</button>
-          <button class="pagination-btn">&rarr;</button>
+        <div class="pagination" id="pagination-container">
+          <!-- Pagination buttons will be generated here by JavaScript -->
         </div>
 
         <!-- No Results Message -->
@@ -236,58 +103,172 @@
     </div>
 
     <script>
-      // Get search query from URL and filter results
+      // Get search query and category from URL
       const urlParams = new URLSearchParams(window.location.search);
       const searchQuery = urlParams.get('q') || '';
+      const categoryFilter = urlParams.get('category') || '';
       
       const resultsTitle = document.getElementById('results-title');
       const resultCount = document.getElementById('result-count');
       const noResultsMsg = document.getElementById('no-results-message');
-      
-      // Filter results based on search query
-      function filterResults(query) {
-        if (!query.trim()) {
-          // Show all results if no query
-          document.querySelectorAll('.search-result-item').forEach(item => {
-            item.style.display = 'grid';
+      const searchResultsList = document.getElementById('search-results-list');
+      const paginationContainer = document.getElementById('pagination-container');
+
+      // Pagination settings
+      const CARDS_PER_PAGE = 6;
+      let allResults = [];
+      let currentPage = 1;
+      let totalPages = 1;
+
+      // Display cards for the current page
+      function displayPage(pageNum) {
+        if (pageNum < 1 || pageNum > totalPages) return;
+        
+        // Show loading overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'loading-overlay active';
+        overlay.innerHTML = `
+          <div class="loading-overlay-content">
+            <div class="loading-overlay-spinner"></div>
+            <div class="loading-overlay-text">Loading page...</div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+        
+        // Simulate page loading (500ms)
+        setTimeout(() => {
+          currentPage = pageNum;
+          const startIdx = (pageNum - 1) * CARDS_PER_PAGE;
+          const endIdx = startIdx + CARDS_PER_PAGE;
+          const pageCards = allResults.slice(startIdx, endIdx);
+
+          // Build HTML for current page
+          let html = '';
+          pageCards.forEach(card => {
+            html += cardsDatabase.createCardElement(card);
           });
-          resultsTitle.textContent = 'Results for "All"';
-          resultCount.textContent = document.querySelectorAll('.search-result-item').length;
+          searchResultsList.innerHTML = html;
+
+          // Update pagination buttons
+          generatePaginationButtons();
+          
+          // Remove overlay
+          overlay.remove();
+          
+          // Scroll to top
+          document.querySelector('.search-page-container').scrollIntoView();
+        }, 500);
+      }
+
+      // Generate pagination buttons based on results
+      function generatePaginationButtons() {
+        paginationContainer.innerHTML = '';
+
+        if (totalPages <= 1) {
+          return; // No pagination needed
+        }
+
+        // Previous button
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'pagination-btn';
+        prevBtn.textContent = '←';
+        prevBtn.addEventListener('click', () => {
+          if (currentPage > 1) displayPage(currentPage - 1);
+        });
+        paginationContainer.appendChild(prevBtn);
+
+        // Page number buttons
+        for (let i = 1; i <= Math.min(totalPages, 6); i++) {
+          const btn = document.createElement('button');
+          btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+          btn.textContent = i;
+          btn.addEventListener('click', () => displayPage(i));
+          paginationContainer.appendChild(btn);
+        }
+
+        // Next button
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'pagination-btn';
+        nextBtn.textContent = '→';
+        nextBtn.addEventListener('click', () => {
+          if (currentPage < totalPages) displayPage(currentPage + 1);
+        });
+        paginationContainer.appendChild(nextBtn);
+      }
+
+      // Load and filter cards
+      function loadCards() {
+        // Check if cardsDatabase is available
+        if (typeof cardsDatabase === 'undefined') {
+          console.error('cardsDatabase is not defined - cards.js may not have loaded');
+          searchResultsList.innerHTML = '<p style="color: red; padding: 20px;">ERROR: Card database failed to load. Please check browser console.</p>';
           noResultsMsg.style.display = 'none';
           return;
         }
-        
-        const searchLower = query.toLowerCase();
-        const items = document.querySelectorAll('.search-result-item');
-        let visibleCount = 0;
-        
-        items.forEach(item => {
-          const tags = item.getAttribute('data-tags').toLowerCase();
-          const title = item.querySelector('h3').textContent.toLowerCase();
-          
-          // Check if search query matches tags or title
-          if (tags.includes(searchLower) || title.includes(searchLower)) {
-            item.style.display = 'grid';
-            visibleCount++;
-          } else {
-            item.style.display = 'none';
-          }
-        });
-        
-        resultsTitle.textContent = `Results for "${query}"`;
-        resultCount.textContent = visibleCount;
-        
-        // Show no results message if needed
-        if (visibleCount === 0) {
-          noResultsMsg.style.display = 'block';
-        } else {
+
+        if (!cardsDatabase.cards || !Array.isArray(cardsDatabase.cards)) {
+          console.error('cardsDatabase.cards is not an array or is missing');
+          searchResultsList.innerHTML = '<p style="color: red; padding: 20px;">ERROR: Card data is invalid.</p>';
           noResultsMsg.style.display = 'none';
+          return;
+        }
+
+        let results = cardsDatabase.cards;
+        console.log('✓ Card database loaded. Total cards:', results.length);
+        console.log('✓ Search query from URL:', searchQuery || '(empty)');
+        console.log('✓ Category filter from URL:', categoryFilter || '(empty)');
+
+        // Filter by category if provided
+        if (categoryFilter) {
+          const before = results.length;
+          results = cardsDatabase.getByCategoryTag(categoryFilter);
+          console.log('✓ Category filter applied. Results:', before, '→', results.length);
+        }
+
+        // Filter by search query if provided
+        if (searchQuery.trim()) {
+          const before = results.length;
+          results = cardsDatabase.search(searchQuery);
+          console.log('✓ Search filter applied. Results:', before, '→', results.length);
+        }
+
+        // Store all results
+        allResults = results;
+        
+        // Build results title
+        let titleText = 'All Listings';
+        if (categoryFilter && searchQuery) {
+          titleText = `${categoryFilter} results for "${searchQuery}"`;
+        } else if (categoryFilter) {
+          titleText = categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1);
+        } else if (searchQuery) {
+          titleText = `Results for "${searchQuery}"`;
+        }
+        
+        // Calculate total pages
+        totalPages = Math.ceil(results.length / CARDS_PER_PAGE);
+        currentPage = 1;
+
+        // Display results
+        if (results.length > 0) {
+          resultsTitle.textContent = titleText;
+          resultCount.textContent = results.length;
+          noResultsMsg.style.display = 'none';
+          displayPage(1);
+          console.log('✓ Successfully loaded', results.length, 'cards in', totalPages, 'pages');
+        } else {
+          searchResultsList.innerHTML = '';
+          paginationContainer.innerHTML = '';
+          resultsTitle.textContent = titleText;
+          resultCount.textContent = 0;
+          noResultsMsg.style.display = 'block';
+          console.log('⚠ No results found');
         }
       }
-      
-      // Initial filter on page load
-      filterResults(searchQuery);
-      
+
+      // Load cards on page load
+      loadCards();
+
       // Mobile filter toggle
       const mobileToggle = document.getElementById('mobile-filter-toggle');
       const searchFilters = document.getElementById('search-filters');
@@ -307,35 +288,6 @@
           }
         });
       }
-
-      // Simple pagination handler
-      document.querySelectorAll('.pagination-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          if (this.textContent === '←' || this.textContent === '→') {
-            return; // Skip arrow buttons for now
-          }
-          
-          // Show loading overlay
-          const overlay = document.createElement('div');
-          overlay.className = 'loading-overlay active';
-          overlay.innerHTML = `
-            <div class="loading-overlay-content">
-              <div class="loading-overlay-spinner"></div>
-              <div class="loading-overlay-text">Loading page...</div>
-            </div>
-          `;
-          document.body.appendChild(overlay);
-          
-          // Simulate page loading (1 second)
-          setTimeout(function() {
-            overlay.remove();
-            
-            // Update active button
-            document.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-          }, 1000);
-        });
-      });
 
       // Filter handler with loading state
       document.querySelector('.apply-filters-btn').addEventListener('click', function() {

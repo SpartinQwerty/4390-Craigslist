@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listing Details - Craigslist</title>
+  <script>
+    // Apply saved theme immediately to prevent flash
+    if (localStorage.getItem('theme') === 'darkmode.css') {
+      document.write('<link id="theme-style" rel="stylesheet" href="darkmode.css" />');
+    } else {
+      document.write('<link id="theme-style" rel="stylesheet" href="styles.css" />');
+    }
+  </script>
+  <script src="cards.js"></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  <script src="loadHeader.js"></script>
+
+  <main class="content">
+    <div class="listing-container" id="listing-content">
+      <!-- Listing details will be loaded here by JavaScript -->
+    </div>
+  </main>
+
+  <script>
+    // Get card ID from URL and display full listing
+    function loadListing() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cardId = parseInt(urlParams.get('id')) || null;
+
+      if (!cardId) {
+        document.getElementById('listing-content').innerHTML = `
+          <div class="error-message">
+            <h2>Listing Not Found</h2>
+            <p>No listing ID provided. <a href="index.html">Return to home</a></p>
+          </div>
+        `;
+        return;
+      }
+
+      if (typeof cardsDatabase === 'undefined' || !cardsDatabase.cards) {
+        document.getElementById('listing-content').innerHTML = `
+          <div class="error-message">
+            <h2>Error Loading Listing</h2>
+            <p>Card database not available. Please try again.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const card = cardsDatabase.getById(cardId);
+
+      if (!card) {
+        document.getElementById('listing-content').innerHTML = `
+          <div class="error-message">
+            <h2>Listing Not Found</h2>
+            <p>The listing you're looking for doesn't exist. <a href="index.html">Return to home</a></p>
+          </div>
+        `;
+        return;
+      }
+
+      // Build the listing HTML
+      const categoryTag = card.categoryTag ? `<span class="category-tag" style="margin-right: 8px;">${card.categoryTag}</span>` : '';
+      const showPriceRating = card.category !== 'community' && card.category !== 'discussion' && card.category !== 'jobs';
+      const showImage = card.category !== 'discussion' && card.category !== 'jobs';
+      const priceHTML = showPriceRating ? `<div class="listing-price">${card.price}</div>` : '';
+      const ratingHTML = showPriceRating ? `<p>${card.rating}</p>` : '';
+      const buttonText = card.category === 'jobs' ? 'Apply' : 
+                         (card.category === 'community' || card.category === 'discussion') ? 'Contact' : 
+                         'Contact Seller';
+      
+      const listingHTML = `
+        <div class="listing-header">
+          <div style="margin-bottom: 8px;">
+            ${categoryTag}
+          </div>
+          <h1>${card.title}</h1>
+          <div class="listing-meta">
+            <span>Posted ${card.date}</span>
+            <span>Category: ${card.category}</span>
+          </div>
+          ${priceHTML}
+        </div>
+
+        ${showImage ? `
+          <div class="listing-image">
+            <img src="${card.image}" alt="${card.title}" onerror="this.style.display='none'">
+          </div>
+
+          ${card.images && card.images.length > 0 ? `
+            <div class="gallery-label">All Images (${card.images.length})</div>
+            <div class="image-gallery">
+              <div class="image-gallery-scroll" id="image-gallery-scroll">
+                ${card.images.map((img, index) => `
+                  <div class="image-gallery-item" onclick="document.querySelector('.listing-image img').src='${img}'">
+                    <img src="${img}" alt="Image ${index + 1}" onerror="this.parentElement.style.display='none'">
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+        ` : ''}
+
+        <div class="listing-details-section">
+          <h2>Description</h2>
+          <div class="listing-description">
+            ${card.description}
+          </div>
+        </div>
+
+        <div class="listing-details-section">
+          <h2>Seller Information</h2>
+          <div class="listing-seller">
+            <div class="seller-avatar">${card.creator.charAt(0).toUpperCase()}</div>
+            <div class="seller-info">
+              <h3>${card.creator}</h3>
+              ${ratingHTML}
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button class="contact-btn" onclick="alert('Contact feature coming soon!')">${buttonText}</button>
+            <button class="back-btn" onclick="history.back()">Back</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('listing-content').innerHTML = listingHTML;
+      document.title = `${card.title} - Craigslist`;
+    }
+
+    // Load listing on page load
+    loadListing();
+  </script>
+</body>
+</html>

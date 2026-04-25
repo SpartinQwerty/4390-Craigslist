@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Account - Craigslist</title>
-  <link id="theme-style" rel="stylesheet" href="styles.css" />
+  <script>
+    // Apply saved theme immediately to prevent flash
+    if (localStorage.getItem('theme') === 'darkmode.css') {
+      document.write('<link id="theme-style" rel="stylesheet" href="darkmode.css" />');
+    } else {
+      document.write('<link id="theme-style" rel="stylesheet" href="styles.css" />');
+    }
+  </script>
+  <script src="cards.js"></script>
 </head>
 
 <body>
@@ -32,31 +40,8 @@
         <h2>postings</h2>
         <button class="create-post-btn" onclick="window.location.href='new_post.html'">Create post</button>
       </div>
-      <div class="listings-list">
-        <div class="listing-item">
-          <div class="listing-image">Image</div>
-          <div class="listing-info">
-            <h3>Mountain Bike</h3>
-            <p class="price">$220</p>
-            <p class="listing-meta">Posted 2 days ago • <span class="status" style="background: #d1ecf1; color: #0c5460;">Active</span></p>
-          </div>
-        </div>
-        <div class="listing-item">
-          <div class="listing-image">Image</div>
-          <div class="listing-info">
-            <h3>Computer Help Needed</h3>
-            <p class="price">$15/hr</p>
-            <p class="listing-meta">Posted 1 day ago • <span class="status" style="background: #f8d7da; color: #721c24;">Complete</span></p>
-          </div>
-        </div>
-        <div class="listing-item">
-          <div class="listing-image">Image</div>
-          <div class="listing-info">
-            <h3>Toyota Camry</h3>
-            <p class="price">$12,000</p>
-            <p class="listing-meta">Posted 3 weeks ago • <span class="status" style="background: #f8d7da; color: #721c24;">Sold</span></p>
-          </div>
-        </div>
+      <div class="listings-list" id="postings-list">
+        <!-- MainUser's postings will be loaded here by JavaScript -->
         <p class="empty-state">no more postings</p>
       </div>
     </div>
@@ -67,13 +52,22 @@
         <h2>drafts</h2>
         <button class="create-post-btn" onclick="window.location.href='new_post.html'">New Draft</button>
       </div>
-      <div class="listings-list">
-        <div class="listing-item">
-          <div class="listing-image">Image</div>
-          <div class="listing-info">
+      <div class="listings-list" id="drafts-list">
+        <div class="search-result-item" style="cursor: default;">
+          <div class="result-image">
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #e0e0e0; color: #666; font-weight: bold;">No Images</div>
+          </div>
+          <div class="result-details">
+            <span class="category-tag">for sale</span>
             <h3>Vintage Desk</h3>
-            <p class="price">$150</p>
-            <p class="listing-meta">Saved 5 days ago • <span class="status" style="background: #fff3cd; color: #856404;">Draft</span></p>
+            <p class="result-price">$150</p>
+            <p class="result-time">Saved 5 days ago</p>
+          </div>
+          <div class="result-description">
+            <p>Beautiful wooden desk with plenty of storage space...</p>
+          </div>
+          <div class="result-user">
+            <p><span class="status" style="background: #fff3cd; color: #856404; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Draft</span></p>
           </div>
         </div>
       </div>
@@ -84,31 +78,37 @@
     <div class="section" id="searches" style="display: none;">
       <h2>saved searches</h2>
       <div class="listings-list">
-        <div class="recent-item">
-          <div class="recent-image">Image</div>
-          <div class="recent-details">
+        <div class="search-result-item" style="cursor: default;">
+          <div class="result-image">
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #e0e0e0; color: #666; font-weight: bold;">📋</div>
+          </div>
+          <div class="result-details">
+            <span class="category-tag">for sale</span>
             <h3>Bikes under $300</h3>
+            <p class="result-time">Saved 10 days ago</p>
+          </div>
+          <div class="result-description">
             <p>Category: For Sale • Price: $0 - $300</p>
           </div>
-          <div class="recent-description">
-            <p>Saved 10 days ago</p>
-          </div>
-          <div class="recent-user">
-            <button class="search-delete-btn" title="Delete" style="background: none; border: none; color: #999; font-size: 16px; cursor: pointer; padding: 0;">✕</button>
+          <div class="result-user">
+            <button class="search-delete-btn" title="Delete" style="background: none; border: none; color: #999; font-size: 18px; cursor: pointer; padding: 0; margin-top: 8px;">✕</button>
           </div>
         </div>
 
-        <div class="recent-item">
-          <div class="recent-image">Image</div>
-          <div class="recent-details">
+        <div class="search-result-item" style="cursor: default;">
+          <div class="result-image">
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #e0e0e0; color: #666; font-weight: bold;">🔧</div>
+          </div>
+          <div class="result-details">
+            <span class="category-tag">services</span>
             <h3>Computer Services</h3>
+            <p class="result-time">Saved 7 days ago</p>
+          </div>
+          <div class="result-description">
             <p>Category: Services • Location: Charlotte</p>
           </div>
-          <div class="recent-description">
-            <p>Saved 7 days ago</p>
-          </div>
-          <div class="recent-user">
-            <button class="search-delete-btn" title="Delete" style="background: none; border: none; color: #999; font-size: 16px; cursor: pointer; padding: 0;">✕</button>
+          <div class="result-user">
+            <button class="search-delete-btn" title="Delete" style="background: none; border: none; color: #999; font-size: 18px; cursor: pointer; padding: 0; margin-top: 8px;">✕</button>
           </div>
         </div>
       </div>
@@ -163,6 +163,24 @@
     <div id="loading-spinner"></div>
 
   <script>
+    // Load MainUser's postings from cards database
+    function loadUserPostings() {
+      if (typeof cardsDatabase === 'undefined') {
+        console.error('cardsDatabase not available');
+        return;
+      }
+
+      const postingsList = document.getElementById('postings-list');
+      const userPostings = cardsDatabase.getByCreator('MainUser');
+
+      if (userPostings.length > 0) {
+        postingsList.innerHTML = userPostings.map(card => cardsDatabase.createCardElement(card)).join('');
+      }
+    }
+
+    // Load postings on page load
+    loadUserPostings();
+
     // Tab functionality with loading skeleton
     const tabs = document.querySelectorAll('.tab');
     const sections = document.querySelectorAll('.section');
@@ -216,6 +234,21 @@
     // Function to refresh tab content
     function refreshTabContent(tabName) {
       const targetSection = document.getElementById(tabName);
+      
+      // Special handling for postings - restore structure and reload
+      if (tabName === 'postings') {
+        targetSection.innerHTML = `
+          <div class="section-header">
+            <h2>postings</h2>
+            <button class="create-post-btn" onclick="window.location.href='new_post.html'">Create post</button>
+          </div>
+          <div class="listings-list" id="postings-list">
+            <p class="empty-state">no more postings</p>
+          </div>
+        `;
+        loadUserPostings();
+        return;
+      }
       
       // Store original HTML for each section
       const originalContent = {

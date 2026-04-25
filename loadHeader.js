@@ -145,6 +145,9 @@ if (savedTheme && themeLink && validThemes.includes(savedTheme)) {
   themeLink.href = "styles.css";
 }
 
+  // Update theme icon to match current theme
+  updateThemeIcon();
+
   if (darkModeBtn) {
     darkModeBtn.addEventListener("click", function () {
       toggleDarkMode(themeLink);
@@ -190,12 +193,38 @@ if (savedTheme && themeLink && validThemes.includes(savedTheme)) {
 
 function toggleDarkMode(themeLink) {
   const isDark = themeLink.getAttribute("href") === "darkmode.css";
+  
+  // Add fade out class
+  document.documentElement.classList.add("theme-transitioning");
 
-  if (isDark) {
-    themeLink.href = "styles.css";
-    localStorage.setItem("theme", "styles.css");
-  } else {
-    themeLink.href = "darkmode.css";
-    localStorage.setItem("theme", "darkmode.css");
+  setTimeout(() => {
+    if (isDark) {
+      themeLink.href = "styles.css";
+      localStorage.setItem("theme", "styles.css");
+    } else {
+      themeLink.href = "darkmode.css";
+      localStorage.setItem("theme", "darkmode.css");
+    }
+    
+    // Update the theme icon
+    updateThemeIcon();
+    
+    // Remove fade out class to trigger fade in
+    document.documentElement.classList.remove("theme-transitioning");
+  }, 150);
+}
+
+function updateThemeIcon() {
+  const themeLink = document.getElementById("theme-style");
+  const darkModeBtn = document.getElementById("darkModeButton");
+  const mobileDarkModeBtn = document.getElementById("mobileDarkModeButton");
+  const isDarkMode = themeLink.getAttribute("href") === "darkmode.css";
+  
+  if (darkModeBtn) {
+    darkModeBtn.textContent = isDarkMode ? "☀️" : "🌙";
+  }
+  
+  if (mobileDarkModeBtn) {
+    mobileDarkModeBtn.textContent = isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
   }
 }

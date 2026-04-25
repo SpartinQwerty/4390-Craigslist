@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
-    <link id="theme-style" rel="stylesheet" href="styles.css" />
+    <script>
+      // Apply saved theme immediately to prevent flash
+      if (localStorage.getItem('theme') === 'darkmode.css') {
+        document.write('<link id="theme-style" rel="stylesheet" href="darkmode.css" />');
+      } else {
+        document.write('<link id="theme-style" rel="stylesheet" href="styles.css" />');
+      }
+    </script>
+    <script src="cards.js"></script>
   </head>
 
   <body>
@@ -16,8 +24,9 @@
         <button
           type="button"
           class="category-card tooltip-trigger hover-bulge"
-          data-tooltip="Placeholder button"
-          onclick="placeholderAction('For Sale')"
+          data-category="forsale"
+          data-tooltip="Browse For Sale listings"
+          onclick="window.location.href='search.html?category=for+sale'"
         >
           For Sale
         </button>
@@ -25,8 +34,9 @@
         <button
           type="button"
           class="category-card tooltip-trigger hover-bulge"
-          data-tooltip="Placeholder button"
-          onclick="placeholderAction('Services')"
+          data-category="service"
+          data-tooltip="Browse Services"
+          onclick="window.location.href='search.html?category=services'"
         >
           Services
         </button>
@@ -34,8 +44,9 @@
         <button
           type="button"
           class="category-card tooltip-trigger hover-bulge"
-          data-tooltip="Placeholder button"
-          onclick="placeholderAction('Discussion Forms')"
+          data-category="discussion"
+          data-tooltip="Browse Discussion topics"
+          onclick="window.location.href='search.html?category=discussion'"
         >
           Discussion Forms
         </button>
@@ -43,8 +54,9 @@
         <button
           type="button"
           class="category-card tooltip-trigger hover-bulge"
-          data-tooltip="Placeholder button"
-          onclick="placeholderAction('Community')"
+          data-category="community"
+          data-tooltip="Browse Community posts"
+          onclick="window.location.href='search.html?category=community'"
         >
           Community
         </button>
@@ -52,8 +64,9 @@
         <button
           type="button"
           class="category-card tooltip-trigger hover-bulge"
-          data-tooltip="Placeholder button"
-          onclick="placeholderAction('Housing')"
+          data-category="housing"
+          data-tooltip="Browse Housing listings"
+          onclick="window.location.href='search.html?category=housing'"
         >
           Housing
         </button>
@@ -61,8 +74,9 @@
         <button
           type="button"
           class="category-card tooltip-trigger hover-bulge"
-          data-tooltip="Placeholder button"
-          onclick="placeholderAction('Jobs')"
+          data-category="jobs"
+          data-tooltip="Browse Job postings"
+          onclick="window.location.href='search.html?category=jobs'"
         >
           Jobs
         </button>
@@ -77,54 +91,8 @@
           aria-live="polite"
         ></div>
 
-        <div class="recent-list">
-          <a
-            href="listing.html?id=1"
-            class="recent-item tooltip-trigger hover-bulge searchable-item"
-            data-tooltip="Go to listing page"
-            data-search="new bike bike 200 never used before bestuser11 for sale"
-          >
-            <div class="recent-image">Image</div>
-
-            <div class="recent-details">
-              <h3>New Bike</h3>
-              <p>$200</p>
-              <p>3 days ago</p>
-            </div>
-
-            <div class="recent-description">
-              <p>Never used before ...</p>
-            </div>
-
-            <div class="recent-user">
-              <p>100% positive</p>
-              <p>BestUser11</p>
-            </div>
-          </a>
-
-          <a
-            href="listing.html?id=2"
-            class="recent-item tooltip-trigger hover-bulge searchable-item"
-            data-tooltip="Go to listing page"
-            data-search="computer help needed 15 hr need help setting up mikewaba10 services"
-          >
-            <div class="recent-image">Image</div>
-
-            <div class="recent-details">
-              <h3>Computer Help Needed</h3>
-              <p>$15/hr</p>
-              <p>1 day ago</p>
-            </div>
-
-            <div class="recent-description">
-              <p>Need help setting up ...</p>
-            </div>
-
-            <div class="recent-user">
-              <p>99% positive</p>
-              <p>MikeWaba10</p>
-            </div>
-          </a>
+        <div class="recent-list" id="recent-list">
+          <!-- 2 most recent cards will be loaded here by JavaScript -->
         </div>
 
         <p id="no-results-message" hidden>No results found.</p>
@@ -135,6 +103,56 @@
         <div id="loading-spinner"></div>
 
 <script>
+  // Load 2 most recent cards for Recent Activity section
+  function loadRecentCards() {
+    if (typeof cardsDatabase === 'undefined' || !cardsDatabase.cards) {
+      console.error('cardsDatabase not available');
+      return;
+    }
+
+    // Sort cards by date (assuming newer dates are more recent)
+    // For now, we'll take the first 2 cards (can be enhanced with actual date parsing)
+    const recentCards = cardsDatabase.cards.slice(0, 2);
+    const recentList = document.getElementById('recent-list');
+
+    recentList.innerHTML = '';
+    recentCards.forEach(card => {
+      const recentItem = document.createElement('a');
+      recentItem.href = `listing.html?id=${card.id}`;
+      recentItem.className = 'recent-item tooltip-trigger hover-bulge searchable-item';
+      recentItem.setAttribute('data-tooltip', 'Go to listing page');
+      
+      // Handle image display
+      const imageHTML = card.image.startsWith('images/')
+        ? `<img src="${card.image}" alt="${card.title}" style="width: 100%; height: 100%; object-fit: cover;"/>`
+        : card.image;
+
+      // Create category tag badge
+      const categoryTag = card.categoryTag ? `<span class="category-tag">${card.categoryTag}</span>` : '';
+
+      recentItem.innerHTML = `
+        <div class="recent-image">${imageHTML}</div>
+        <div class="recent-details">
+          ${categoryTag}
+          <h3>${card.title}</h3>
+          <p>${card.price}</p>
+          <p>${card.date}</p>
+        </div>
+        <div class="recent-description">
+          <p>${card.description}</p>
+        </div>
+        <div class="recent-user">
+          <p>${card.rating}</p>
+          <p>${card.creator}</p>
+        </div>
+      `;
+      recentList.appendChild(recentItem);
+    });
+  }
+
+  // Load recent cards on page load
+  loadRecentCards();
+
   function placeholderAction(sectionName) {
     alert(sectionName + " placeholder");
   }

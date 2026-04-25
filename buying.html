@@ -3,26 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buying</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Buying - Craigslist</title>
+  <script>
+    // Apply saved theme immediately to prevent flash
+    if (localStorage.getItem('theme') === 'darkmode.css') {
+      document.write('<link id="theme-style" rel="stylesheet" href="darkmode.css" />');
+    } else {
+      document.write('<link id="theme-style" rel="stylesheet" href="styles.css" />');
+    }
+  </script>
+  <script src="cards.js"></script>
 </head>
 
 <body>
-  <header class="header">
-    <div class="logo">My Website</div>
-
-    <nav class="nav">
-         <!-- Holder until buttons are added. Acting as easy navigation check between pages. !-->
-      <a href="/index.html">Home</a>
-      <a href="/buying.html">Buying/Selling</a>
-      <a href="/new_post.html">New Post</a>
-    
-    </nav>
-  </header>
+  <div id="header-placeholder"></div>
+  <script src="loadHeader.js"></script>
 
   <main class="content">
-    <h1>Buying/Selling Page Holder</h1>
-
+    <h1 id="page-title">All Listings</h1>
+    
+    <div class="search-results-list" id="listings-container">
+      <!-- All listings will be loaded here by JavaScript -->
+    </div>
   </main>
+
+  <script>
+    // Load listings with optional category filtering
+    function loadAllListings() {
+      if (typeof cardsDatabase === 'undefined' || !cardsDatabase.cards) {
+        console.error('cardsDatabase not available');
+        document.getElementById('listings-container').innerHTML = '<p>Error loading listings</p>';
+        return;
+      }
+
+      // Get category from URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryTag = urlParams.get('category');
+
+      // Filter listings by category if provided
+      let listings = cardsDatabase.cards;
+      let pageTitle = 'All Listings';
+
+      if (categoryTag) {
+        listings = cardsDatabase.getByCategoryTag(categoryTag);
+        // Format title nicely
+        const formattedCategory = categoryTag.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        pageTitle = formattedCategory;
+        document.title = `${formattedCategory} - Craigslist`;
+      }
+
+      document.getElementById('page-title').textContent = pageTitle;
+
+      const container = document.getElementById('listings-container');
+      container.innerHTML = '';
+
+      if (listings.length > 0) {
+        listings.forEach(card => {
+          container.innerHTML += cardsDatabase.createCardElement(card);
+        });
+        console.log('Loaded', listings.length, 'listings');
+      } else {
+        container.innerHTML = '<p style="padding: 20px; text-align: center; color: #999;">No listings found in this category.</p>';
+      }
+    }
+
+    // Load listings on page load
+    loadAllListings();
+  </script>
 </body>
 </html>
