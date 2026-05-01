@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     price: document.getElementById("price"),
     location: document.getElementById("location"),
     description: document.getElementById("description"),
+    pictures: document.getElementById("pictures"),
   };
 
   const validators = {
@@ -44,6 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (trimmed.length < 15) return "Description must be at least 15 characters long.";
       return "Description looks good.";
     },
+    pictures(value) {
+      const input = document.getElementById("pictures");
+      // Always return a valid state since pictures are optional
+      return "looks good";
+    },
   };
 
   function getFeedbackEl(fieldName) {
@@ -55,31 +61,32 @@ document.addEventListener("DOMContentLoaded", function () {
     field.classList.remove("is-error", "is-success");
     feedback.classList.remove("feedback-error", "feedback-success");
 
-    if (!message) {
-      feedback.textContent = "";
-      return;
-    }
-
     if (state === "error") {
       field.classList.add("is-error");
       feedback.classList.add("feedback-error");
+      feedback.textContent = "✕ " + message;
     }
 
     if (state === "success") {
       field.classList.add("is-success");
       feedback.classList.add("feedback-success");
+      feedback.textContent = message ? "✓ " + message : "";
     }
 
-    feedback.textContent = message;
+    if (!state) {
+      feedback.textContent = "";
+    }
   }
 
   function validateField(fieldName, showSuccess = true) {
     const field = fields[fieldName];
     const message = validators[fieldName](field.value);
-    const isValid = message.toLowerCase().includes("looks good") || message.toLowerCase().includes("selected") || message.toLowerCase().includes("valid");
+    const isValid = message.toLowerCase().includes("looks good") || message.toLowerCase().includes("selected") || message.toLowerCase().includes("looks valid");
 
     if (isValid) {
-      setFieldState(field, showSuccess ? "success" : "", showSuccess ? message : "");
+      // For pictures field, don't show any success message, just styling
+      const displayMessage = fieldName === 'pictures' ? "" : "";
+      setFieldState(field, showSuccess ? "success" : "", displayMessage);
       return true;
     }
 
@@ -90,7 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
   Object.keys(fields).forEach((fieldName) => {
     const field = fields[fieldName];
 
-    field.addEventListener("input", function () {
+    // Use 'change' event for file input, 'input' for others
+    const eventType = fieldName === 'pictures' ? 'change' : 'input';
+    
+    field.addEventListener(eventType, function () {
       validateField(fieldName, true);
       formStatus.textContent = "";
       formStatus.className = "form-status";
@@ -104,7 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const allValid = Object.keys(fields).every((fieldName) => validateField(fieldName, true));
+    // Only validate required fields (exclude pictures which is optional)
+    const requiredFields = ["title", "category", "price", "location", "description"];
+    const allValid = requiredFields.every((fieldName) => validateField(fieldName, true));
 
     if (!allValid) {
       formStatus.textContent = "Please fix the highlighted fields before posting your listing.";

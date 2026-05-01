@@ -451,7 +451,7 @@ a:hover {
 
 /* Searches tab layout - more compact grid */
 #searches .recent-item {
-  grid-template-columns: 70px 1fr auto;
+  grid-template-columns: 1fr auto;
 }
 
 #searches .recent-details {
@@ -638,7 +638,7 @@ a:hover {
 /* NEW POST FILE */
 /* CARD CONTAINER */
 .post-card {
-  max-width: 500px;
+  max-width: 700px;
   margin: 40px auto;
   background: #fff;
   padding: 25px 30px;
@@ -675,7 +675,8 @@ a:hover {
   border: 1px solid #ccc;
   font-size: 14px;
   outline: none;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  background-color: #f9f9f9;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 /* FOCUS EFFECT */
@@ -702,6 +703,22 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .post-card {
+    max-width: 500px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .field-feedback {

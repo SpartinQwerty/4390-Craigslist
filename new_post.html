@@ -30,22 +30,24 @@
           <p class="field-feedback" id="title-feedback" aria-live="polite"></p>
         </div>
 
-        <div class="form-field">
-          <label for="category">Category</label>
-          <select id="category" name="category" aria-describedby="category-feedback">
-            <option value="">Select a category</option>
-            <option value="Bikes">Bikes</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Cars">Cars</option>
-            <option value="Electronics">Electronics</option>
-          </select>
-          <p class="field-feedback" id="category-feedback" aria-live="polite"></p>
-        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="category">Category</label>
+            <select id="category" name="category" aria-describedby="category-feedback">
+              <option value="">Select a category</option>
+              <option value="Bikes">Bikes</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Cars">Cars</option>
+              <option value="Electronics">Electronics</option>
+            </select>
+            <p class="field-feedback" id="category-feedback" aria-live="polite"></p>
+          </div>
 
-        <div class="form-field">
-          <label for="price">Price</label>
-          <input type="text" id="price" name="price" placeholder="$0.00" inputmode="decimal" aria-describedby="price-feedback" />
-          <p class="field-feedback" id="price-feedback" aria-live="polite"></p>
+          <div class="form-field">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price" placeholder="$0.00" inputmode="decimal" aria-describedby="price-feedback" />
+            <p class="field-feedback" id="price-feedback" aria-live="polite"></p>
+          </div>
         </div>
 
         <div class="form-field">
@@ -58,6 +60,12 @@
           <label for="description">Description</label>
           <textarea id="description" name="description" rows="5" placeholder="Write a short description" maxlength="300" aria-describedby="description-feedback"></textarea>
           <p class="field-feedback" id="description-feedback" aria-live="polite"></p>
+        </div>
+
+        <div class="form-field">
+          <label for="pictures">Pictures</label>
+          <input type="file" id="pictures" name="pictures" multiple accept="image/*" aria-describedby="pictures-feedback" />
+          <p class="field-feedback" id="pictures-feedback" aria-live="polite"></p>
         </div>
 
         <button type="submit" class="submit-btn">Post Listing</button>
